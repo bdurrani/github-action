@@ -16,7 +16,7 @@ try {
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
   });
-  console.log(tags);
+  console.log(`tags: ${JSON.stringify(tags)}`);
 } catch (error) {
   core.setFailed(error.message);
 }
