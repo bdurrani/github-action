@@ -17,6 +17,13 @@ try {
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
+  const token = core.getInput("repo-token", { required: true });
+  const client = new github.GitHub(token);
+  const tags = client.repos.listTags({
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
+  });
+  console.log(`tags: ${JSON.stringify(tags)}`);
 } catch (error) {
   core.setFailed(error.message);
 }
